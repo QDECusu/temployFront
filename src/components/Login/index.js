@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { blue } from 'material-ui/colors';
-import { login, signup } from '../../api/AuthService';
+import { login, signup } from '../../actions/user.action';
+
+const mapDispatchToProps = { login, signup };
 
 const Mode = {
 	login: 'login',
@@ -35,14 +38,18 @@ class Login extends PureComponent {
 	getToggleMode = mode => (mode === Mode.login ? Mode.signup : Mode.login)
 	login = () => {
 		const { username, password } = this.state;
-		login({ username, password });
+		this.props.login({ username, password });
 	}
 	signup = () => {
 		const {
 			username, email, password, repeat,
 		} = this.state;
 		if (password === repeat) {
-			signup({ username, email, password });
+			this.props.signup({
+				username,
+				password,
+				email: email === '' ? null : email,
+			});
 		} else {
 			this.setState({ repErr: 'passwords don\'t match' });
 		}
@@ -116,4 +123,4 @@ const styles = {
 	},
 };
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
