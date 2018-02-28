@@ -35,10 +35,11 @@ class Login extends PureComponent {
 		const modeChange = this.getToggleMode(mode);
 		return (
 			<div style={styles.container}>
-				<div style={{ margin: 50, display: 'flex', flexDirection: 'column' }}>
+				<div style={{margin: 60, display: 'flex', flexDirection: 'column'}}>
 					<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 					<TextField
 						name="username"
+						placeholder="username"
 						onChange={this.onChange}
 						value={this.state.username}
 						floatingLabelText="username"
@@ -46,6 +47,7 @@ class Login extends PureComponent {
 					<TextField
 						name="password"
 						type="password"
+						placeholder="password" 
 						onChange={this.onChange}
 						value={this.state.password}
 						floatingLabelText="password"
@@ -58,6 +60,11 @@ class Login extends PureComponent {
 								onChange={this.onChange}
 							/>
 					}
+					<p></p>
+					<div>
+						<a href="">Forgot Username/Password?</a>
+					</div>
+					<p></p>
 					<div style={{ display: 'flex' }}>
 						<Button
 							onClick={this.onSubmit}
@@ -81,14 +88,13 @@ const styles = {
 	container: {
 		display: 'flex',
 		flexDirection: 'column',
-		borderColor: blue[500],
+		borderColor: blue[800],
 		borderStyle: 'solid',
 	},
 	title: {
 		textAlign: 'center',
-		color: blue[500],
+		color: blue[800],
 	},
 };
 
 export default Login;
-
