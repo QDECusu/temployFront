@@ -28,7 +28,7 @@ export const login = async ({ username, password }) => {
 export const signup = async ({ username, email, password }) => {
 	const headers = new Headers({ 'Content-Type': 'application/json' });
 	const body = JSON.stringify({ username, email, password });
-	const response = await fetch(`${BASE_URL}/login/`, { method: 'post', body, headers });
+	const response = await fetch(`${BASE_URL}/signup/`, { method: 'post', body, headers });
 	const { token } = await response.json();
 	setToken(token);
 };

@@ -14,11 +14,19 @@ class Login extends PureComponent {
 		username: '',
 		email: '',
 		password: '',
-		passwordRepeat: '',
+		repeat: '',
+		repErr: '',
 		mode: Mode.login,
 	}
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
+	}
+	passwordRepeat = (e) => {
+		const { repErr, password } = this.state;
+		if (repErr !== '' && password === e.target.value) {
+			this.setState({ repErr: '' });
+		}
+		this.onChange(e);
 	}
 	toggleMode = () => {
 		const mode = this.getToggleMode(this.state.mode);
@@ -31,14 +39,16 @@ class Login extends PureComponent {
 	}
 	signup = () => {
 		const {
-			username, email, password, passwordRepeat,
+			username, email, password, repeat,
 		} = this.state;
-		if (password === passwordRepeat) {
+		if (password === repeat) {
 			signup({ username, email, password });
+		} else {
+			this.setState({ repErr: 'passwords don\'t match' });
 		}
 	}
 	render() {
-		const { mode } = this.state;
+		const { mode, repErr } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
 			<div style={styles.container}>
@@ -46,24 +56,26 @@ class Login extends PureComponent {
 					<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 					<TextField
 						name="username"
-						placeholder="username"
+						label="username"
 						onChange={this.onChange}
 						value={this.state.username}
 					/>
 					<TextField
 						name="password"
 						type="password"
-						placeholder="password"
+						label="password"
 						onChange={this.onChange}
 						value={this.state.password}
 					/>
 					{
 						mode === 'signup' &&
 							<TextField
-								name="passwordRepeat"
-								placeholder="repeat password"
-								value={this.state.passwordRepeat}
-								onChange={this.onChange}
+								name="repeat"
+								error={repErr !== ''}
+								type="password"
+								label={repErr === '' ? 'repeat password' : repErr}
+								value={this.state.repeat}
+								onChange={this.passwordRepeat}
 							/>
 					}
 					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
