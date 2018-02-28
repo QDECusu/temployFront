@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { blue } from 'material-ui/colors';
+import { login, signup } from '../../api/AuthService';
 
 const Mode = {
 	login: 'login',
@@ -11,6 +12,7 @@ const Mode = {
 class Login extends PureComponent {
 	state = {
 		username: '',
+		email: '',
 		password: '',
 		passwordRepeat: '',
 		mode: Mode.login,
@@ -23,34 +25,37 @@ class Login extends PureComponent {
 		this.setState({ mode });
 	}
 	getToggleMode = mode => (mode === Mode.login ? Mode.signup : Mode.login)
-	onSubmit = () => (this.state.mode === Mode.login ? this.login() : this.signup())
 	login = () => {
-		console.log();
+		const { username, password } = this.state;
+		login({ username, password });
 	}
 	signup = () => {
-		console.log('signup request here');
+		const {
+			username, email, password, passwordRepeat,
+		} = this.state;
+		if (password === passwordRepeat) {
+			signup({ username, email, password });
+		}
 	}
 	render() {
 		const { mode } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
 			<div style={styles.container}>
-				<div style={{margin: 60, display: 'flex', flexDirection: 'column'}}>
+				<div style={{ margin: 60, display: 'flex', flexDirection: 'column' }}>
 					<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 					<TextField
 						name="username"
 						placeholder="username"
 						onChange={this.onChange}
 						value={this.state.username}
-						floatingLabelText="username"
 					/>
 					<TextField
 						name="password"
 						type="password"
-						placeholder="password" 
+						placeholder="password"
 						onChange={this.onChange}
 						value={this.state.password}
-						floatingLabelText="password"
 					/>
 					{
 						mode === 'signup' &&
@@ -61,14 +66,11 @@ class Login extends PureComponent {
 								onChange={this.onChange}
 							/>
 					}
-					<p></p>
-					<div>
-						<a href="">Forgot Username/Password?</a>
-					</div>
-					<p></p>
-					<div style={{ display: 'flex' }}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
 						<Button
-							onClick={this.onSubmit}
+							onClick={this[mode]}
+							variant="raised"
+							color="primary"
 						>
 							<span>{mode}</span>
 						</Button>
@@ -78,6 +80,9 @@ class Login extends PureComponent {
 						>
 							<span>{modeChange}</span>
 						</Button>
+					</div>
+					<div>
+						Forgot Username/Password?
 					</div>
 				</div>
 			</div>
