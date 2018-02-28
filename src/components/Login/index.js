@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { blue } from 'material-ui/colors';
 import { login, signup } from '../../api/AuthService';
+import './style.css';
 
 const Mode = {
 	login: 'login',
@@ -14,19 +15,11 @@ class Login extends PureComponent {
 		username: '',
 		email: '',
 		password: '',
-		repeat: '',
-		repErr: '',
+		passwordRepeat: '',
 		mode: Mode.login,
 	}
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
-	}
-	passwordRepeat = (e) => {
-		const { repErr, password } = this.state;
-		if (repErr !== '' && password === e.target.value) {
-			this.setState({ repErr: '' });
-		}
-		this.onChange(e);
 	}
 	toggleMode = () => {
 		const mode = this.getToggleMode(this.state.mode);
@@ -39,43 +32,39 @@ class Login extends PureComponent {
 	}
 	signup = () => {
 		const {
-			username, email, password, repeat,
+			username, email, password, passwordRepeat,
 		} = this.state;
-		if (password === repeat) {
+		if (password === passwordRepeat) {
 			signup({ username, email, password });
-		} else {
-			this.setState({ repErr: 'passwords don\'t match' });
 		}
 	}
 	render() {
-		const { mode, repErr } = this.state;
+		const { mode } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
-			<div style={styles.container}>
+			<div id="login" style={styles.container}>
 				<div style={{ margin: 60, display: 'flex', flexDirection: 'column' }}>
 					<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 					<TextField
 						name="username"
-						label="username"
+						placeholder="username"
 						onChange={this.onChange}
 						value={this.state.username}
 					/>
 					<TextField
 						name="password"
 						type="password"
-						label="password"
+						placeholder="password"
 						onChange={this.onChange}
 						value={this.state.password}
 					/>
 					{
 						mode === 'signup' &&
 							<TextField
-								name="repeat"
-								error={repErr !== ''}
-								type="password"
-								label={repErr === '' ? 'repeat password' : repErr}
-								value={this.state.repeat}
-								onChange={this.passwordRepeat}
+								name="passwordRepeat"
+								placeholder="repeat password"
+								value={this.state.passwordRepeat}
+								onChange={this.onChange}
 							/>
 					}
 					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
@@ -94,7 +83,7 @@ class Login extends PureComponent {
 						</Button>
 					</div>
 					<div>
-						Forgot Username/Password?
+						<a href="">Forgot Username/Password?</a>
 					</div>
 				</div>
 			</div>
