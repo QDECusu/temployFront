@@ -16,6 +16,9 @@ class Login extends PureComponent {
 		email: '',
 		password: '',
 		passwordRepeat: '',
+		nameFirst: '',
+		nameLast: '',
+		zipCode: '',
 		mode: Mode.login,
 	}
 	onChange = (e) => {
@@ -62,8 +65,46 @@ class Login extends PureComponent {
 						mode === 'signup' &&
 							<TextField
 								name="passwordRepeat"
+								type="password"
 								placeholder="repeat password"
 								value={this.state.passwordRepeat}
+								onChange={this.onChange}
+							/>
+					}
+					{
+						mode === 'signup' &&
+							<TextField
+								name="nameFirst"
+								placeholder="first name"
+								value={this.state.nameFirst}
+								onChange={this.onChange}
+							/>
+					}
+					{
+						mode === 'signup' &&
+							<TextField
+								name="nameLast"
+								placeholder="last name"
+								value={this.state.nameLast}
+								onChange={this.onChange}
+							/>
+					}
+					{
+						mode === 'signup' &&
+							<TextField
+								name="email"
+								type="email"
+								placeholder="email"
+								value={this.state.email}
+								onChange={this.onChange}
+							/>
+					}
+					{
+						mode === 'signup' &&
+							<TextField
+								name="zipCode"
+								placeholder="zip-code"
+								value={this.state.zipCode}
 								onChange={this.onChange}
 							/>
 					}
@@ -82,9 +123,11 @@ class Login extends PureComponent {
 							<span>{modeChange}</span>
 						</Button>
 					</div>
-					<div>
-						<a href="">Forgot Username/Password?</a>
-					</div>
+					{ mode === 'login' &&
+						<div>
+							<a href="">Forgot Username/Password?</a>
+						</div>
+					}
 				</div>
 			</div>
 		);
