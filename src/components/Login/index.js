@@ -56,6 +56,7 @@ class Login extends PureComponent {
 						mode === 'signup' &&
 							<TextField
 								name="passwordRepeat"
+								placeholder="repeat password"
 								value={this.state.passwordRepeat}
 								onChange={this.onChange}
 							/>
@@ -90,6 +91,7 @@ const styles = {
 		flexDirection: 'column',
 		borderColor: blue[800],
 		borderStyle: 'solid',
+		backgroundColor: blue[0],
 	},
 	title: {
 		textAlign: 'center',
