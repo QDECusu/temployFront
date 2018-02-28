@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
@@ -6,6 +6,7 @@ import { blue } from 'material-ui/colors';
 import { login, signup } from '../../actions/user.action';
 
 const mapDispatchToProps = { login, signup };
+
 
 const Mode = {
 	login: 'login',
@@ -17,16 +18,18 @@ class Login extends PureComponent {
 		username: '',
 		email: '',
 		password: '',
-		repeat: '',
 		repErr: '',
+		repeat: '',
+		nameFirst: '',
+		nameLast: '',
+		zipCode: '',
 		mode: Mode.login,
 	}
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
 	}
-	passwordRepeat = (e) => {
-		const { repErr, password } = this.state;
-		if (repErr !== '' && password === e.target.value) {
+	onRepeatChange = (e) => {
+		if (this.state.password === e.target.value) {
 			this.setState({ repErr: '' });
 		}
 		this.onChange(e);
@@ -55,10 +58,10 @@ class Login extends PureComponent {
 		}
 	}
 	render() {
-		const { mode, repErr } = this.state;
+		const { mode } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
-			<div style={styles.container}>
+			<div id="login" style={styles.container}>
 				<div style={{ margin: 60, display: 'flex', flexDirection: 'column' }}>
 					<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 					<TextField
@@ -75,15 +78,42 @@ class Login extends PureComponent {
 						value={this.state.password}
 					/>
 					{
-						mode === 'signup' &&
+						mode === Mode.signup &&
+						<Fragment>
 							<TextField
 								name="repeat"
-								error={repErr !== ''}
 								type="password"
-								label={repErr === '' ? 'repeat password' : repErr}
+								label="repeat password"
+								error={this.state.repErr !== ''}
 								value={this.state.repeat}
-								onChange={this.passwordRepeat}
+								onChange={this.onRepeatChange}
 							/>
+							<TextField
+								name="nameFirst"
+								label="first name"
+								value={this.state.nameFirst}
+								onChange={this.onChange}
+							/>
+							<TextField
+								name="nameLast"
+								label="last name"
+								value={this.state.nameLast}
+								onChange={this.onChange}
+							/>
+							<TextField
+								name="email"
+								type="email"
+								label="email"
+								value={this.state.email}
+								onChange={this.onChange}
+							/>
+							<TextField
+								name="zipCode"
+								label="zip-code"
+								value={this.state.zipCode}
+								onChange={this.onChange}
+							/>
+						</Fragment>
 					}
 					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
 						<Button
@@ -100,9 +130,11 @@ class Login extends PureComponent {
 							<span>{modeChange}</span>
 						</Button>
 					</div>
-					<div>
-						Forgot Username/Password?
-					</div>
+					{ mode === Mode.login &&
+						<div>
+							<a href="">Forgot Username/Password?</a>
+						</div>
+					}
 				</div>
 			</div>
 		);
