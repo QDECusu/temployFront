@@ -81,15 +81,12 @@ class Login extends PureComponent {
 						</Button>
 					</div>
 					}
-					<div style={{
-						margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',
-					}}
-					>
+					<div style={{ margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',}}>
 						{ mode === Mode.signup &&
-						<h1 style={styles.title}>{mode.toUpperCase()}</h1>
+							<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 						}
 						{ mode === Mode.login &&
-						<h1 className="loginTitle" style={styles.title}>{mode.toUpperCase()}</h1>
+							<h1 className="loginTitle" style={styles.title}>{mode.toUpperCase()}</h1>
 						}
 						<TextField
 							name="username"
@@ -105,116 +102,89 @@ class Login extends PureComponent {
 							value={this.state.password}
 						/>
 						{ mode === Mode.signup &&
-						<Fragment>
-							<TextField
-								name="repeat"
-								type="password"
-								label="repeat password"
-								error={this.state.repErr !== ''}
-								value={this.state.repeat}
-								onChange={this.onRepeatChange}
-							/>
-							<TextField
-								name="firstName"
-								label="first name"
-								value={this.state.firstName}
-								onChange={this.onChange}
-							/>
-							<TextField
-								name="lastName"
-								label="last name"
-								value={this.state.lastName}
-								onChange={this.onChange}
-							/>
-							<TextField
-								name="email"
-								type="email"
-								label="email"
-								value={this.state.email}
-								onChange={this.onChange}
-							/>
-							<TextField
-								name="zipCode"
-								label="zip-code"
-								value={this.state.zipCode}
-								onChange={this.onChange}
-							/>
-						</Fragment>
-					}
-					{ mode === Mode.login &&
-					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
-						<Button
-							onClick={this[mode]}
-							variant="raised"
-							color="primary"
-						>
-							<span>{mode}</span>
-						</Button>
-						<Button
-							label={modeChange}
-							onClick={this.toggleMode}
-						>
-							<span>{modeChange}</span>
-						</Button>
-					</div>
-					}
-					{ mode === Mode.signup &&
-					<div>
-						<div>
-							<p></p>
-							<input id="checkBox" type="checkbox" name="agreeTerms" color="blue"></input>
-							<label for="agreeTerms">I Agree </label>
-							<a href="/">Terms and Conditions</a>
-							<p></p>
-						</div>
-						<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+							<Fragment>
+								<TextField
+									name="repeat"
+									type="password"
+									label="repeat password"
+									error={this.state.repErr !== ''}
+									value={this.state.repeat}
+									onChange={this.onRepeatChange}
+								/>
+								<TextField
+									name="firstName"
+									label="first name"
+									value={this.state.firstName}
+									onChange={this.onChange}
+								/>
+								<TextField
+									name="lastName"
+									label="last name"
+									value={this.state.lastName}
+									onChange={this.onChange}
+								/>
+								<TextField
+									name="email"
+									type="email"
+									label="email"
+									value={this.state.email}
+									onChange={this.onChange}
+								/>
+								<TextField
+									name="zipCode"
+									label="zip-code"
+									value={this.state.zipCode}
+									onChange={this.onChange}
+								/>
+							</Fragment>
 						}
 						{ mode === Mode.login &&
-						<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
-							<Button
-								onClick={this[mode]}
-								variant="raised"
-								color="primary"
-							>
-								<span>{mode}</span>
-							</Button>
-							<Button
-								label={modeChange}
-								onClick={this.toggleMode}
-							>
-								<span>{modeChange}</span>
-							</Button>
-						</div>
-						}
-						{ mode === Mode.signup &&
-						<div>
-							<div>
-								<p />
-								<input id="checkBox" type="checkbox" name="agreeTerms" />
-								<label htmlFor="agreeTerms">I Agree </label>
-								<a href="/">Terms and Conditions</a>
-								<p />
-							</div>
-							<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+							<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
 								<Button
 									onClick={this[mode]}
 									variant="raised"
 									color="primary"
 								>
-									<span>Create Account</span>
+									<span>{mode}</span>
+								</Button>
+								<Button
+									label={modeChange}
+									onClick={this.toggleMode}
+								>
+									<span>{modeChange}</span>
 								</Button>
 							</div>
-						</div>
 						}
-						{ mode === Mode.login &&
-						<div>
-							<p />
-							<a href="/">Forgot Username/Password?</a>
+						
+						{ mode === Mode.signup &&
+							<div>
+								<div>
+									<p></p>
+									<input id="checkBox" type="checkbox" name="agreeTerms" />
+									<label htmlFor="agreeTerms">I Agree </label>
+									<a href="/">Terms and Conditions</a>
+									<p></p>
+								</div>
+								<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+									<Button
+										onClick={this[mode]}
+										variant="raised"
+										color="primary"
+									>
+										<span>Create Account</span>
+									</Button>
+								</div>
+							</div>
+							}
+							{ mode === Mode.login &&
+							<div>
+								<p></p>
+								<a href="/">Forgot Username/Password?</a>
+							</div>
+							}
 						</div>
-						}
 					</div>
 				</div>
-			</div>
 		);
 	}
 }
