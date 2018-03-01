@@ -156,7 +156,7 @@ class Login extends PureComponent {
 					<div>
 						<div>
 							<p></p>
-							<input id="checkBox" type="checkbox" name="agreeTerms"></input>
+							<input id="checkBox" type="checkbox" name="agreeTerms" color="blue"></input>
 							<label for="agreeTerms">I Agree </label>
 							<a href="/">Terms and Conditions</a>
 							<p></p>
