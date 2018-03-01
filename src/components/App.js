@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logout, getUser } from '../actions/user.action';
 import Login from './Login';
+import Account from './Account';
+import Header from './Header';
 import './style.css';
 
 const mapStateToProps = ({ user }) => ({ user });
@@ -22,7 +24,12 @@ class App extends Component {
 				{
 					this.props.user === null
 						? <Login />
-						: null
+						: (
+							<div style={{ display: 'flex', justifyContent: '' }}>
+								<Header logout={this.logout} />
+								<Account />
+							</div>
+						)
 				}
 			</div>
 		);

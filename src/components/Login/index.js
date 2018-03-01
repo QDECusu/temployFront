@@ -21,8 +21,8 @@ class Login extends PureComponent {
 		password: '',
 		repErr: '',
 		repeat: '',
-		nameFirst: '',
-		nameLast: '',
+		firstName: '',
+		lastName: '',
 		zipCode: '',
 		mode: Mode.login,
 	}
@@ -46,14 +46,14 @@ class Login extends PureComponent {
 	}
 	signup = () => {
 		const {
-			username, email, password, repeat, nameFirst, nameLast, zipCode,
+			username, email, password, repeat, firstName, lastName, zipCode,
 		} = this.state;
 		if (password === repeat) {
 			this.props.signup({
 				username,
 				password,
-				nameFirst,
-				nameLast,
+				firstName,
+				lastName,
 				zipCode,
 				email: email === '' ? null : email,
 			});
@@ -66,10 +66,13 @@ class Login extends PureComponent {
 		const modeChange = this.getToggleMode(mode);
 		return (
 			<div>
-			<h1 className="title">TEMPLOY</h1>
-			<div className="login" style={styles.container}>
-				{ mode === Mode.signup &&
-					<div style={{ display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20 }}>
+				<h1 className="title">TEMPLOY</h1>
+				<div className="login" style={styles.container}>
+					{ mode === Mode.signup &&
+					<div style={{
+						display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20,
+					}}
+					>
 						<Button
 							label={modeChange}
 							onClick={this.toggleMode}
@@ -78,27 +81,30 @@ class Login extends PureComponent {
 						</Button>
 					</div>
 					}
-				<div style={{ margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column' }}>
-					{ mode === Mode.signup &&
+					<div style={{
+						margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',
+					}}
+					>
+						{ mode === Mode.signup &&
 						<h1 style={styles.title}>{mode.toUpperCase()}</h1>
-					}
-					{ mode === Mode.login &&
+						}
+						{ mode === Mode.login &&
 						<h1 className="loginTitle" style={styles.title}>{mode.toUpperCase()}</h1>
-					}
-					<TextField
-						name="username"
-						label="username"
-						onChange={this.onChange}
-						value={this.state.username}
-					/>
-					<TextField
-						name="password"
-						type="password"
-						label="password"
-						onChange={this.onChange}
-						value={this.state.password}
-					/>
-					{ mode === Mode.signup &&
+						}
+						<TextField
+							name="username"
+							label="username"
+							onChange={this.onChange}
+							value={this.state.username}
+						/>
+						<TextField
+							name="password"
+							type="password"
+							label="password"
+							onChange={this.onChange}
+							value={this.state.password}
+						/>
+						{ mode === Mode.signup &&
 						<Fragment>
 							<TextField
 								name="repeat"
@@ -109,15 +115,15 @@ class Login extends PureComponent {
 								onChange={this.onRepeatChange}
 							/>
 							<TextField
-								name="nameFirst"
+								name="firstName"
 								label="first name"
-								value={this.state.nameFirst}
+								value={this.state.firstName}
 								onChange={this.onChange}
 							/>
 							<TextField
-								name="nameLast"
+								name="lastName"
 								label="last name"
-								value={this.state.nameLast}
+								value={this.state.lastName}
 								onChange={this.onChange}
 							/>
 							<TextField
@@ -162,24 +168,52 @@ class Login extends PureComponent {
 							<p></p>
 						</div>
 						<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+						}
+						{ mode === Mode.login &&
+						<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
 							<Button
 								onClick={this[mode]}
 								variant="raised"
 								color="primary"
 							>
-								<span>Create Account</span>
+								<span>{mode}</span>
+							</Button>
+							<Button
+								label={modeChange}
+								onClick={this.toggleMode}
+							>
+								<span>{modeChange}</span>
 							</Button>
 						</div>
-					</div>
-					}
-					{ mode === Mode.login &&
+						}
+						{ mode === Mode.signup &&
 						<div>
-							<p></p>
+							<div>
+								<p />
+								<input id="checkBox" type="checkbox" name="agreeTerms" />
+								<label htmlFor="agreeTerms">I Agree </label>
+								<a href="/">Terms and Conditions</a>
+								<p />
+							</div>
+							<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+								<Button
+									onClick={this[mode]}
+									variant="raised"
+									color="primary"
+								>
+									<span>Create Account</span>
+								</Button>
+							</div>
+						</div>
+						}
+						{ mode === Mode.login &&
+						<div>
+							<p />
 							<a href="/">Forgot Username/Password?</a>
 						</div>
-					}
+						}
+					</div>
 				</div>
-			</div>
 			</div>
 		);
 	}
