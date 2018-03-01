@@ -10,8 +10,8 @@ const setToken = token =>
 export const login = async ({ username, password }) => {
 	const headers = new Headers({ 'Content-Type': 'application/json' });
 	const body = JSON.stringify({ username, password });
-	const response = await fetch(`${BASE_URL}/login/`, { method: 'post', body, headers });
-	const { token } = await response.json();
+	const blob = await fetch(`${BASE_URL}/login/`, { method: 'post', body, headers });
+	const { token } = await blob.json();
 	if (token) {
 		setToken(token);
 		return true;
@@ -22,8 +22,10 @@ export const login = async ({ username, password }) => {
 export const signup = async ({ username, email, password }) => {
 	const headers = new Headers({ 'Content-Type': 'application/json' });
 	const body = JSON.stringify({ username, email, password });
-	const response = await fetch(`${BASE_URL}/signup/`, { method: 'post', body, headers });
-	const { token } = await response.json();
+	const blob = await fetch(`${BASE_URL}/signup/`, { method: 'post', body, headers });
+	const response = await blob.json();
+	console.log(response);
+	const { token } = response;
 	if (token) {
 		setToken(token);
 		return true;
@@ -38,8 +40,8 @@ const _request = async (route, options) => {
 	const headers = new Headers({ 'Content-Type': 'application/json', Authorization: `Token ${token}` });
 	const body = options.body ? JSON.stringify(options.body) : null;
 	const optionsWithAuth = body === null ? { ...options, headers } : { ...options, headers, body };
-	const resp = await fetch(`${BASE_URL}/${route}/`, optionsWithAuth);
-	return resp.json();
+	const blob = await fetch(`${BASE_URL}/${route}/`, optionsWithAuth);
+	return blob.json();
 };
 
 const get = (route, options = {}) => _request(route, { ...options, method: 'get' });

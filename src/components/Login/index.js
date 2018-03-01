@@ -21,8 +21,8 @@ class Login extends PureComponent {
 		password: '',
 		repErr: '',
 		repeat: '',
-		nameFirst: '',
-		nameLast: '',
+		firstName: '',
+		lastName: '',
 		zipCode: '',
 		mode: Mode.login,
 	}
@@ -46,14 +46,14 @@ class Login extends PureComponent {
 	}
 	signup = () => {
 		const {
-			username, email, password, repeat, nameFirst, nameLast, zipCode,
+			username, email, password, repeat, firstName, lastName, zipCode,
 		} = this.state;
 		if (password === repeat) {
 			this.props.signup({
 				username,
 				password,
-				nameFirst,
-				nameLast,
+				firstName,
+				lastName,
 				zipCode,
 				email: email === '' ? null : email,
 			});
@@ -67,7 +67,10 @@ class Login extends PureComponent {
 		return (
 			<div className="login" style={styles.container}>
 				{ mode === Mode.signup &&
-					<div style={{ display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20 }}>
+					<div style={{
+						display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20,
+					}}
+					>
 						<Button
 							label={modeChange}
 							onClick={this.toggleMode}
@@ -75,8 +78,11 @@ class Login extends PureComponent {
 							<span>Back</span>
 						</Button>
 					</div>
-					}
-				<div style={{ margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column' }}>
+				}
+				<div style={{
+					margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',
+				}}
+				>
 					{ mode === Mode.signup &&
 						<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 					}
@@ -108,15 +114,15 @@ class Login extends PureComponent {
 								onChange={this.onRepeatChange}
 							/>
 							<TextField
-								name="nameFirst"
+								name="firstName"
 								label="first name"
-								value={this.state.nameFirst}
+								value={this.state.firstName}
 								onChange={this.onChange}
 							/>
 							<TextField
-								name="nameLast"
+								name="lastName"
 								label="last name"
-								value={this.state.nameLast}
+								value={this.state.lastName}
 								onChange={this.onChange}
 							/>
 							<TextField
@@ -154,9 +160,9 @@ class Login extends PureComponent {
 					{ mode === Mode.signup &&
 					<div>
 						<div>
-							<p></p>
-							<a href="">Terms and Conditions</a>
-							<p></p>
+							<p />
+							<a href="/">Terms and Conditions</a>
+							<p />
 						</div>
 						<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
 							<Button
@@ -171,8 +177,8 @@ class Login extends PureComponent {
 					}
 					{ mode === Mode.login &&
 						<div>
-							<p></p>
-							<a href="">Forgot Username/Password?</a>
+							<p />
+							<a href="/">Forgot Username/Password?</a>
 						</div>
 					}
 				</div>
