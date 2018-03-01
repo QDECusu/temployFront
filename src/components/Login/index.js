@@ -24,6 +24,7 @@ class Login extends PureComponent {
 		firstName: '',
 		lastName: '',
 		zipCode: '',
+		checkbox: false,
 		mode: Mode.login,
 	}
 	onChange = (e) => {
@@ -46,7 +47,7 @@ class Login extends PureComponent {
 	}
 	signup = () => {
 		const {
-			username, email, password, repeat, firstName, lastName, zipCode,
+			username, email, password, repeat, firstName, lastName, zipCode, checkbox,
 		} = this.state;
 		if (password === repeat) {
 			this.props.signup({
@@ -55,6 +56,7 @@ class Login extends PureComponent {
 				firstName,
 				lastName,
 				zipCode,
+				checkbox,
 				email: email === '' ? null : email,
 			});
 		} else {
@@ -160,8 +162,13 @@ class Login extends PureComponent {
 							<div>
 								<div>
 									<p></p>
-									<input id="checkBox" type="checkbox" name="agreeTerms" />
-									<label htmlFor="agreeTerms">I Agree </label>
+									<input 
+										type="checkbox" 
+										name="checkbox" 
+										value={this.state.checkbox} 
+										onChange={this.onChange}
+									/>
+									<label htmlFor="checkbox">I Agree </label>
 									<a href="/">Terms and Conditions</a>
 									<p></p>
 								</div>
@@ -170,6 +177,7 @@ class Login extends PureComponent {
 										onClick={this[mode]}
 										variant="raised"
 										color="primary"
+										disabled={!this.state.checkbox}
 									>
 										<span>Create Account</span>
 									</Button>
