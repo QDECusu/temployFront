@@ -65,6 +65,8 @@ class Login extends PureComponent {
 		const { mode } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
+			<div>
+			<h1 className="title">TEMPLOY</h1>
 			<div className="login" style={styles.container}>
 				{ mode === Mode.signup &&
 					<div style={{ display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20 }}>
@@ -156,7 +158,7 @@ class Login extends PureComponent {
 							<p></p>
 							<input id="checkBox" type="checkbox" name="agreeTerms"></input>
 							<label for="agreeTerms">I Agree </label>
-							<a href="">Terms and Conditions</a>
+							<a href="/">Terms and Conditions</a>
 							<p></p>
 						</div>
 						<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
@@ -173,10 +175,11 @@ class Login extends PureComponent {
 					{ mode === Mode.login &&
 						<div>
 							<p></p>
-							<a href="">Forgot Username/Password?</a>
+							<a href="/">Forgot Username/Password?</a>
 						</div>
 					}
 				</div>
+			</div>
 			</div>
 		);
 	}
