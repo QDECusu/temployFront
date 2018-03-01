@@ -11,7 +11,7 @@ const mapDispatchToProps = { login, signup };
 
 const Mode = {
 	login: 'login',
-	signup: 'signup',
+	signup: 'sign up',
 };
 
 class Login extends PureComponent {
@@ -65,8 +65,10 @@ class Login extends PureComponent {
 		const { mode } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
-			<div className="login" style={styles.container}>
-				{ mode === Mode.signup &&
+			<div>
+				<h1 className="title">TEMPLOY</h1>
+				<div className="login" style={styles.container}>
+					{ mode === Mode.signup &&
 					<div style={{
 						display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20,
 					}}
@@ -78,32 +80,31 @@ class Login extends PureComponent {
 							<span>Back</span>
 						</Button>
 					</div>
-				}
-				<div style={{
-					margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',
-				}}
-				>
-					{ mode === Mode.signup &&
+					}
+					<div style={{
+						margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',
+					}}
+					>
+						{ mode === Mode.signup &&
 						<h1 style={styles.title}>{mode.toUpperCase()}</h1>
-					}
-					{ mode === Mode.login &&
+						}
+						{ mode === Mode.login &&
 						<h1 className="loginTitle" style={styles.title}>{mode.toUpperCase()}</h1>
-					}
-					<TextField
-						name="username"
-						label="username"
-						onChange={this.onChange}
-						value={this.state.username}
-					/>
-					<TextField
-						name="password"
-						type="password"
-						label="password"
-						onChange={this.onChange}
-						value={this.state.password}
-					/>
-					{
-						mode === Mode.signup &&
+						}
+						<TextField
+							name="username"
+							label="username"
+							onChange={this.onChange}
+							value={this.state.username}
+						/>
+						<TextField
+							name="password"
+							type="password"
+							label="password"
+							onChange={this.onChange}
+							value={this.state.password}
+						/>
+						{ mode === Mode.signup &&
 						<Fragment>
 							<TextField
 								name="repeat"
@@ -139,48 +140,51 @@ class Login extends PureComponent {
 								onChange={this.onChange}
 							/>
 						</Fragment>
-					}
-					{ mode === Mode.login &&
-					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
-						<Button
-							onClick={this[mode]}
-							variant="raised"
-							color="primary"
-						>
-							<span>{mode}</span>
-						</Button>
-						<Button
-							label={modeChange}
-							onClick={this.toggleMode}
-						>
-							<span>{modeChange}</span>
-						</Button>
-					</div>
-					}
-					{ mode === Mode.signup &&
-					<div>
-						<div>
-							<p />
-							<a href="/">Terms and Conditions</a>
-							<p />
-						</div>
-						<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+						}
+						{ mode === Mode.login &&
+						<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
 							<Button
 								onClick={this[mode]}
 								variant="raised"
 								color="primary"
 							>
-								<span>Create Account</span>
+								<span>{mode}</span>
+							</Button>
+							<Button
+								label={modeChange}
+								onClick={this.toggleMode}
+							>
+								<span>{modeChange}</span>
 							</Button>
 						</div>
-					</div>
-					}
-					{ mode === Mode.login &&
+						}
+						{ mode === Mode.signup &&
+						<div>
+							<div>
+								<p />
+								<input id="checkBox" type="checkbox" name="agreeTerms" />
+								<label htmlFor="agreeTerms">I Agree </label>
+								<a href="/">Terms and Conditions</a>
+								<p />
+							</div>
+							<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+								<Button
+									onClick={this[mode]}
+									variant="raised"
+									color="primary"
+								>
+									<span>Create Account</span>
+								</Button>
+							</div>
+						</div>
+						}
+						{ mode === Mode.login &&
 						<div>
 							<p />
 							<a href="/">Forgot Username/Password?</a>
 						</div>
-					}
+						}
+					</div>
 				</div>
 			</div>
 		);

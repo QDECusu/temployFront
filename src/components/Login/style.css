@@ -6,3 +6,10 @@
 .loginTitle {
     margin-top: 5rem;
 }
+
+.title {
+    font-size: 250%;
+    margin: 10px;
+    color: white;
+    text-align: center;
+}
