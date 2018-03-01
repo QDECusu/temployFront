@@ -46,12 +46,15 @@ class Login extends PureComponent {
 	}
 	signup = () => {
 		const {
-			username, email, password, repeat,
+			username, email, password, repeat, nameFirst, nameLast, zipCode,
 		} = this.state;
 		if (password === repeat) {
 			this.props.signup({
 				username,
 				password,
+				nameFirst,
+				nameLast,
+				zipCode,
 				email: email === '' ? null : email,
 			});
 		} else {
@@ -62,9 +65,24 @@ class Login extends PureComponent {
 		const { mode } = this.state;
 		const modeChange = this.getToggleMode(mode);
 		return (
-			<div id="login" style={styles.container}>
-				<div style={{ margin: 60, display: 'flex', flexDirection: 'column' }}>
-					<h1 style={styles.title}>{mode.toUpperCase()}</h1>
+			<div className="login" style={styles.container}>
+				{ mode === Mode.signup &&
+					<div style={{ display: 'flex', justifyContent: 'left', margin: 5, marginTop: 20 }}>
+						<Button
+							label={modeChange}
+							onClick={this.toggleMode}
+						>
+							<span>Back</span>
+						</Button>
+					</div>
+					}
+				<div style={{ margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column' }}>
+					{ mode === Mode.signup &&
+						<h1 style={styles.title}>{mode.toUpperCase()}</h1>
+					}
+					{ mode === Mode.login &&
+						<h1 className="loginTitle" style={styles.title}>{mode.toUpperCase()}</h1>
+					}
 					<TextField
 						name="username"
 						label="username"
@@ -116,6 +134,7 @@ class Login extends PureComponent {
 							/>
 						</Fragment>
 					}
+					{ mode === Mode.login &&
 					<div style={{ display: 'flex', justifyContent: 'space-between', margin: 10 }}>
 						<Button
 							onClick={this[mode]}
@@ -131,8 +150,28 @@ class Login extends PureComponent {
 							<span>{modeChange}</span>
 						</Button>
 					</div>
+					}
+					{ mode === Mode.signup &&
+					<div>
+						<div>
+							<p></p>
+							<a href="">Terms and Conditions</a>
+							<p></p>
+						</div>
+						<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
+							<Button
+								onClick={this[mode]}
+								variant="raised"
+								color="primary"
+							>
+								<span>Create Account</span>
+							</Button>
+						</div>
+					</div>
+					}
 					{ mode === Mode.login &&
 						<div>
+							<p></p>
 							<a href="">Forgot Username/Password?</a>
 						</div>
 					}

@@ -1,9 +1,8 @@
-body {
-    background-color: rgb(0,0,75);
+.login {
+    background-color: white;
+    padding: 1.5%;
 }
 
-
-#login {
-    background-color: white;
-    padding: 1%;
+.loginTitle {
+    margin-top: 5rem;
 }
