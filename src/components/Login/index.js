@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { blue } from 'material-ui/colors';
 import { login, signup } from '../../actions/user.action';
+import './style.css';
 
 const mapDispatchToProps = { login, signup };
 
