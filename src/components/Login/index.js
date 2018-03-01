@@ -11,7 +11,7 @@ const mapDispatchToProps = { login, signup };
 
 const Mode = {
 	login: 'login',
-	signup: 'signup',
+	signup: 'sign up',
 };
 
 class Login extends PureComponent {
@@ -96,8 +96,7 @@ class Login extends PureComponent {
 						onChange={this.onChange}
 						value={this.state.password}
 					/>
-					{
-						mode === Mode.signup &&
+					{ mode === Mode.signup &&
 						<Fragment>
 							<TextField
 								name="repeat"
@@ -155,6 +154,8 @@ class Login extends PureComponent {
 					<div>
 						<div>
 							<p></p>
+							<input id="checkBox" type="checkbox" name="agreeTerms"></input>
+							<label for="agreeTerms">I Agree </label>
 							<a href="">Terms and Conditions</a>
 							<p></p>
 						</div>
