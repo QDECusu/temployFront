@@ -29,9 +29,9 @@ class App extends Component {
 
 const styles = {
 	container: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
+		// display: 'flex',
+		// justifyContent: 'center',
+		// alignItems: 'center',
 	},
 };
 
