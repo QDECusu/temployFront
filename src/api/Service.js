@@ -14,9 +14,9 @@ export const login = async ({ username, password }) => {
 	const { token } = await blob.json();
 	if (token) {
 		setToken(token);
-		return true;
+		return { success: true };
 	}
-	return false;
+	return { success: false };
 };
 
 export const signup = async (data) => {
@@ -29,13 +29,12 @@ export const signup = async (data) => {
 	});
 	const blob = await fetch(`${BASE_URL}/signup/`, { method: 'post', body, headers });
 	const response = await blob.json();
-	console.log(response);
 	const { token } = response;
 	if (token) {
 		setToken(token);
-		return true;
+		return { success: true };
 	}
-	return false;
+	return { success: false };
 };
 
 export const logout = () => setToken(null);

@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withAlert } from 'react-alert';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { blue } from 'material-ui/colors';
@@ -7,7 +8,6 @@ import { login, signup } from '../../actions/user.action';
 import './style.css';
 
 const mapDispatchToProps = { login, signup };
-
 
 const Mode = {
 	login: 'login',
@@ -46,14 +46,20 @@ class Login extends PureComponent {
 	getToggleMode = mode => (mode === Mode.login ? Mode.signup : Mode.login)
 	login = () => {
 		const { username, password } = this.state;
-		this.props.login({ username, password });
+		const response = this.props.login({ username, password });
+		if (!response.success) {
+			this.alert('Something went wrong');
+		}
+	}
+	alert = (msg) => {
+		this.props.alert.error(msg, { timeout: 3000 });
 	}
 	signup = () => {
 		const {
 			username, email, password, repeat, firstName, lastName, zipCode, checkbox,
 		} = this.state;
 		if (password === repeat) {
-			this.props.signup({
+			const response = this.props.signup({
 				username,
 				password,
 				firstName,
@@ -62,6 +68,9 @@ class Login extends PureComponent {
 				checkbox,
 				email: email === '' ? null : email,
 			});
+			if (!response.success) {
+				this.alert('Something went wrong');
+			}
 		} else {
 			this.setState({ repErr: 'passwords don\'t match' });
 		}
@@ -217,4 +226,4 @@ const styles = {
 	},
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(withAlert(Login));

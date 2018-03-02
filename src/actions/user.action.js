@@ -11,9 +11,11 @@ const setUser = user => ({ type: types.SET_USER, payload: { user } });
 
 export const login = ({ username, password }) => async (dispatch) => {
 	try {
-		if (await _login({ username, password })) {
+		const response = await _login({ username, password });
+		if (response.success) {
 			dispatch(getUser());
 		}
+		return response;
 	} catch (e) {
 		console.error(e);
 	}
@@ -22,9 +24,11 @@ export const login = ({ username, password }) => async (dispatch) => {
 export const signup = data => async (dispatch) => {
 	console.log('signup');
 	try {
-		if (await _signup(data)) {
+		const response = await _signup(data);
+		if (response.success) {
 			dispatch(getUser());
 		}
+		return response;
 	} catch (e) {
 		console.error(e);
 	}
