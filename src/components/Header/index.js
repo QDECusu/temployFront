@@ -30,7 +30,7 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		backgroundColor: 'red',
+		backgroundColor: 'white',
 		height: 80,
 	},
 };

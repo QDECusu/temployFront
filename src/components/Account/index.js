@@ -12,7 +12,7 @@ class Account extends PureComponent {
 		return (
 			<div className="aside" style={styles.container}>
 				<div>
-					<img src="images/user.jpg" alt="Profile Picture" height="100" width="100"/>
+					<img src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png" alt="Profile Picture" height="150" width="150"/>
 				</div>
 				<div className="accountInfo" style={styles.name}>
 					<span>{user.first_name} {user.last_name}</span>

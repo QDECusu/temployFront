@@ -183,7 +183,7 @@ class Login extends PureComponent {
 										value={this.state.checkbox}
 										onChange={this.checkboxToggle}
 									/>
-									<span>I Agree </span>
+									<span className="agree">I Agree</span>
 									<a href="/">Terms and Conditions</a>
 									<p />
 								</div>
