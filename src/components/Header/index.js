@@ -1,5 +1,9 @@
 import React, { PureComponent } from 'react';
 import Button from 'material-ui/Button';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/user.action';
+
+const mapDispatchToProps = { logout };
 
 class Header extends PureComponent {
 	render() {
@@ -31,4 +35,4 @@ const styles = {
 	},
 };
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);
