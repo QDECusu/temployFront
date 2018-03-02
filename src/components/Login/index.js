@@ -11,7 +11,7 @@ const mapDispatchToProps = { login, signup };
 
 const Mode = {
 	login: 'login',
-	signup: 'sign up',
+	signup: 'signup',
 };
 
 class Login extends PureComponent {
@@ -35,6 +35,9 @@ class Login extends PureComponent {
 			this.setState({ repErr: '' });
 		}
 		this.onChange(e);
+	}
+	checkboxToggle = () => {
+		this.setState(prevState => ({ checkbox: !prevState.checkbox }));
 	}
 	toggleMode = () => {
 		const mode = this.getToggleMode(this.state.mode);
@@ -83,7 +86,10 @@ class Login extends PureComponent {
 						</Button>
 					</div>
 					}
-					<div style={{ margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',}}>
+					<div style={{
+						margin: 60, marginTop: 0, display: 'flex', flexDirection: 'column',
+					}}
+					>
 						{ mode === Mode.signup &&
 							<h1 style={styles.title}>{mode.toUpperCase()}</h1>
 						}
@@ -108,7 +114,7 @@ class Login extends PureComponent {
 								<TextField
 									name="repeat"
 									type="password"
-									label="repeat password"
+									label={this.state.repErr === '' ? 'repeat password' : this.state.repErr}
 									error={this.state.repErr !== ''}
 									value={this.state.repeat}
 									onChange={this.onRepeatChange}
@@ -157,20 +163,20 @@ class Login extends PureComponent {
 								</Button>
 							</div>
 						}
-						
+
 						{ mode === Mode.signup &&
 							<div>
 								<div>
-									<p></p>
-									<input 
-										type="checkbox" 
-										name="checkbox" 
-										value={this.state.checkbox} 
-										onChange={this.onChange}
+									<p />
+									<input
+										type="checkbox"
+										name="checkbox"
+										value={this.state.checkbox}
+										onChange={this.checkboxToggle}
 									/>
 									<label htmlFor="checkbox">I Agree </label>
 									<a href="/">Terms and Conditions</a>
-									<p></p>
+									<p />
 								</div>
 								<div style={{ display: 'flex', justifyContent: 'center', margin: 10 }}>
 									<Button
@@ -183,16 +189,16 @@ class Login extends PureComponent {
 									</Button>
 								</div>
 							</div>
-							}
-							{ mode === Mode.login &&
+						}
+						{ mode === Mode.login &&
 							<div>
-								<p></p>
+								<p />
 								<a href="/">Forgot Username/Password?</a>
 							</div>
-							}
-						</div>
+						}
 					</div>
 				</div>
+			</div>
 		);
 	}
 }

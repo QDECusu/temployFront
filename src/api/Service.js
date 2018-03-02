@@ -19,9 +19,14 @@ export const login = async ({ username, password }) => {
 	return false;
 };
 
-export const signup = async ({ username, email, password }) => {
+export const signup = async (data) => {
+	const {
+		firstName: first_name, lastName: last_name, email, username, password,
+	} = data;
 	const headers = new Headers({ 'Content-Type': 'application/json' });
-	const body = JSON.stringify({ username, email, password });
+	const body = JSON.stringify({
+		first_name, last_name, email, username, password,
+	});
 	const blob = await fetch(`${BASE_URL}/signup/`, { method: 'post', body, headers });
 	const response = await blob.json();
 	console.log(response);

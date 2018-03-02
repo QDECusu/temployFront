@@ -19,9 +19,10 @@ export const login = ({ username, password }) => async (dispatch) => {
 	}
 };
 
-export const signup = ({ username, password, email = null }) => async (dispatch) => {
+export const signup = data => async (dispatch) => {
+	console.log('signup');
 	try {
-		if (await _signup({ username, password, email })) {
+		if (await _signup(data)) {
 			dispatch(getUser());
 		}
 	} catch (e) {
@@ -32,7 +33,7 @@ export const signup = ({ username, password, email = null }) => async (dispatch)
 export const getUser = () => async (dispatch) => {
 	try {
 		if (getToken() !== null) {
-			const user = await request.post('getUserJsonAuth');
+			const user = await request.post('getUserDetail');
 			dispatch(setUser(user));
 		}
 	} catch (e) {
