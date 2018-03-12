@@ -10,6 +10,8 @@ services:
       - /var/www/node/node_modules
     networks:
       - temployback_temploy
+    ports:
+      - "3000:3000"
     environment:
       - VIRTUAL_PORT=3000
       - VIRTUAL_HOST=temploy.localhost
