@@ -5,8 +5,17 @@ services:
     container_name: temploy-frontend
     build: ./
     command: npm start
-    ports:
-      - "3000:3000"
     volumes:
       - ./:/var/www/node
       - /var/www/node/node_modules
+    networks:
+      - temployback_temploy
+    ports:
+      - "3000:3000"
+    environment:
+      - VIRTUAL_PORT=3000
+      - VIRTUAL_HOST=temploy.localhost
+
+networks:
+  temployback_temploy:
+    external: True

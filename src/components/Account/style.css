@@ -1,0 +1,19 @@
+/*Account Stylesheet*/
+
+.aside {
+    background-color: white;
+    border: solid;
+    border-color: gray;
+    text-align: center;
+    padding: 10%;
+}
+
+.accountInfo {
+    margin: 1%;
+    padding: 2%;
+}
+
+div {
+    font: white;
+    font-size: 108%;
+}
